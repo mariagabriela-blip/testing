@@ -17,6 +17,10 @@ export default function EmailCapture() {
   return (
     <section id="formulario" className="bg-crema py-24 px-6">
       <div className="max-w-xl mx-auto text-center">
+        {/* Logo amarillo */}
+        <div className="w-20 h-20 mx-auto mb-6 rounded-xl overflow-hidden bg-amarillo">
+          <img src="/7.png" alt="Logo Gabriela" className="w-full h-full object-cover" />
+        </div>
         <p className="font-sans text-sm uppercase tracking-[0.25em] text-morado mb-4">
           Newsletter
         </p>

@@ -54,6 +54,10 @@ export default function Services() {
           <p className="font-sans text-crema/60 max-w-xl mx-auto">
             Un enfoque integral para que tu negocio crezca con bases sólidas.
           </p>
+          {/* Logo verde */}
+          <div className="w-16 h-16 mx-auto mt-6 rounded-xl overflow-hidden">
+            <img src="/10.png" alt="Logo Gabriela" className="w-full h-full object-cover" />
+          </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

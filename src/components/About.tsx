@@ -1,10 +1,12 @@
+import Image from "next/image";
+
 export default function About() {
   return (
     <section id="sobre-mi" className="bg-crema py-24 px-6">
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        {/* Photo placeholder */}
-        <div className="aspect-[3/4] bg-morado/10 rounded-2xl flex items-center justify-center border-2 border-dashed border-morado/30">
-          <span className="font-sans text-morado/50 text-sm">Foto de Gabriela</span>
+        {/* Logo crema */}
+        <div className="aspect-[3/4] bg-crema rounded-2xl flex items-center justify-center">
+          <Image src="/8.png" alt="Logo Gabriela" width={400} height={400} className="w-3/4 h-auto rounded-2xl" />
         </div>
 
         <div>

@@ -66,6 +66,10 @@ export default function Quiz() {
           <h2 className="text-4xl md:text-5xl font-bold text-crema mb-4">
             ¿Dónde estás en tu camino emprendedor?
           </h2>
+          {/* Logo vinotinto */}
+          <div className="w-20 h-20 mx-auto mb-4 rounded-xl overflow-hidden">
+            <img src="/9.png" alt="Logo Gabriela" className="w-full h-full object-cover" />
+          </div>
           <p className="font-sans text-crema/70">
             Responde 3 preguntas y descubre tu próximo paso.
           </p>

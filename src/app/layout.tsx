@@ -1,25 +1,18 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 
-// ---------------------------------------------------------
-// FONTS: cuando tengas los archivos .ttf, descomenta esto:
-//
-// import localFont from "next/font/local";
-//
-// const bodoni = localFont({
-//   src: "../fonts/BodoniModa-VariableFont.ttf",
-//   variable: "--font-bodoni",
-//   display: "swap",
-// });
-//
-// const futura = localFont({
-//   src: "../fonts/FuturaPT-Book.ttf",
-//   variable: "--font-futura",
-//   display: "swap",
-// });
-//
-// Y en el <body> agrega: className={`${bodoni.variable} ${futura.variable} antialiased`}
-// ---------------------------------------------------------
+const bodoni = localFont({
+  src: "../fonts/BodoniModa-VariableFont_opsz,wght.ttf",
+  variable: "--font-bodoni",
+  display: "swap",
+});
+
+const futura = localFont({
+  src: "../fonts/FuturaCyrillicBook.ttf",
+  variable: "--font-futura",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title:
@@ -35,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="antialiased">{children}</body>
+      <body className={`${bodoni.variable} ${futura.variable} antialiased`}>{children}</body>
     </html>
   );
 }

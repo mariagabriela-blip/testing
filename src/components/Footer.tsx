@@ -2,13 +2,18 @@ export default function Footer() {
   return (
     <footer className="bg-oscuro border-t border-crema/10 py-12 px-6">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
-          <p className="font-display text-xl font-bold text-crema">
-            Gabriela Kurtagic
-          </p>
-          <p className="font-sans text-crema/50 text-sm mt-1">
-            Estrategia de negocios para el mercado latino en USA
-          </p>
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-lg overflow-hidden">
+            <img src="/10.png" alt="Logo Gabriela" className="w-full h-full object-cover" />
+          </div>
+          <div>
+            <p className="font-display text-xl font-bold text-crema">
+              Gabriela Kurtagic
+            </p>
+            <p className="font-sans text-crema/50 text-sm mt-1">
+              Estrategia de negocios para el mercado latino en USA
+            </p>
+          </div>
         </div>
 
         <div className="flex gap-6 font-sans text-sm text-crema/60">

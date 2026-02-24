@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-oscuro text-crema px-6 py-24 overflow-hidden">
@@ -5,6 +7,11 @@ export default function Hero() {
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-morado via-naranja to-amarillo" />
 
       <div className="max-w-4xl mx-auto text-center">
+        {/* Logo morado */}
+        <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 rounded-2xl overflow-hidden">
+          <Image src="/6.png" alt="Logo Gabriela" width={128} height={128} className="w-full h-full object-cover" />
+        </div>
+
         <p className="font-sans text-sm uppercase tracking-[0.3em] text-amarillo mb-6">
           Economista &middot; Estratega de Negocios
         </p>
