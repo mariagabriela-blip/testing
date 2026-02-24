@@ -19,14 +19,14 @@ export default function Navbar() {
           : "bg-crema/90 backdrop-blur-xl"
       } border-b border-morado/10`}
     >
-      <a href="#" className="font-display text-[26px] font-extrabold text-morado tracking-tight">
+      <a href="/" className="font-display text-[26px] font-extrabold text-morado tracking-tight">
         g<span className="text-naranja">.</span>
       </a>
 
       <ul className="hidden md:flex items-center gap-9">
         <li>
           <a
-            href="#sobre-mi"
+            href="/#sobre-mi"
             className="font-sans text-[11px] font-medium uppercase tracking-[1.5px] text-oscuro/50 hover:text-morado transition-colors"
           >
             Sobre mi
@@ -34,7 +34,7 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#servicios"
+            href="/#servicios"
             className="font-sans text-[11px] font-medium uppercase tracking-[1.5px] text-oscuro/50 hover:text-morado transition-colors"
           >
             Contenido
@@ -42,7 +42,15 @@ export default function Navbar() {
         </li>
         <li>
           <a
-            href="#contacto"
+            href="/recursos"
+            className="font-sans text-[11px] font-medium uppercase tracking-[1.5px] text-oscuro/50 hover:text-morado transition-colors"
+          >
+            Recursos
+          </a>
+        </li>
+        <li>
+          <a
+            href="/#contacto"
             className="font-sans text-[10px] font-bold uppercase tracking-[2px] bg-morado text-white px-5 py-2.5 hover:bg-oscuro transition-colors"
           >
             Unete →
