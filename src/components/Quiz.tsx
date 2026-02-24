@@ -1,144 +1,117 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
-interface Question {
-  question: string;
-  options: string[];
-}
-
-const questions: Question[] = [
+const options = [
   {
-    question: "¿En qué etapa está tu negocio?",
-    options: [
-      "Tengo una idea pero no he empezado",
-      "Ya tengo clientes pero quiero crecer",
-      "Facturo bien pero me siento estancada",
-    ],
+    key: "emprendedor",
+    emoji: "🏗️",
+    text: "Tengo un negocio propio",
+    sub: "Y quiero entender mejor mis numeros",
   },
   {
-    question: "¿Cuál es tu mayor desafío ahora mismo?",
-    options: [
-      "No sé cómo diferenciarme de la competencia",
-      "Me cuesta conseguir clientes consistentemente",
-      "Trabajo demasiado y no veo resultados proporcionales",
-    ],
+    key: "comenzando",
+    emoji: "🌱",
+    text: "Estoy comenzando",
+    sub: "Quiero hacerlo bien desde el principio",
   },
   {
-    question: "¿Qué buscas en este momento?",
-    options: [
-      "Claridad y un plan concreto",
-      "Una estrategia de marketing que funcione",
-      "Escalar sin perder calidad de vida",
-    ],
+    key: "freelance",
+    emoji: "💻",
+    text: "Soy freelancer",
+    sub: "Y quiero profesionalizar mis finanzas",
+  },
+  {
+    key: "corporativo",
+    emoji: "🏢",
+    text: "Trabajo en empresa",
+    sub: "Y quiero entender mas de estrategia",
   },
 ];
 
+const results: Record<string, string> = {
+  emprendedor:
+    '"Si tienes un negocio y no sabes cuanto ganas exactamente, el primer problema no es de ventas — es de claridad financiera."',
+  comenzando:
+    '"La mejor decision que puedes tomar antes de lanzar es entender tus numeros. El entusiasmo no paga las facturas."',
+  freelance:
+    '"Ser freelancer no te exime de tener un modelo de negocio. Tu eres el producto y necesitas saber cuanto cuesta operarte."',
+  corporativo:
+    '"Entender los numeros de tu empresa te hace indispensable. La estrategia sin datos es solo una opinion."',
+};
+
 export default function Quiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [completed, setCompleted] = useState(false);
-
-  const handleAnswer = (optionIndex: number) => {
-    const newAnswers = [...answers, optionIndex];
-    setAnswers(newAnswers);
-
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setCompleted(true);
-    }
-  };
-
-  const reset = () => {
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setCompleted(false);
-  };
+  const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <section id="quiz" className="bg-vinotinto py-24 px-6">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="font-sans text-sm uppercase tracking-[0.25em] text-amarillo mb-4">
-            Quiz interactivo
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-crema mb-4">
-            ¿Dónde estás en tu camino emprendedor?
-          </h2>
-          {/* Logo vinotinto */}
-          <div className="w-20 h-20 mx-auto mb-4 rounded-xl overflow-hidden">
-            <img src="/9.png" alt="Logo Gabriela" className="w-full h-full object-cover" />
-          </div>
-          <p className="font-sans text-crema/70">
-            Responde 3 preguntas y descubre tu próximo paso.
-          </p>
+    <section id="quiz" className="bg-morado px-6 md:px-[60px] py-24 md:py-[100px] text-center">
+      <div className="reveal">
+        <div className="font-sans text-[10px] font-bold uppercase tracking-[3px] text-amarillo mb-3">
+          Para ti si...
+        </div>
+        <h2 className="font-display text-[clamp(32px,4vw,52px)] font-extrabold text-white tracking-tight mb-3">
+          Cual es tu<br />
+          <em className="text-amarillo">situacion ahora?</em>
+        </h2>
+
+        {/* Logo vinotinto */}
+        <div className="w-16 h-16 mx-auto mb-4 overflow-hidden">
+          <Image src="/9.png" alt="Logo" width={64} height={64} className="w-full h-full object-cover" />
         </div>
 
-        <div className="bg-oscuro/40 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-crema/10">
-          {!completed ? (
-            <>
-              {/* Progress bar */}
-              <div className="flex gap-2 mb-8">
-                {questions.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-1 flex-1 rounded-full transition-colors ${
-                      i <= currentQuestion ? "bg-amarillo" : "bg-crema/20"
-                    }`}
-                  />
-                ))}
-              </div>
-
-              <p className="font-sans text-crema/50 text-sm mb-2">
-                Pregunta {currentQuestion + 1} de {questions.length}
-              </p>
-              <h3 className="text-2xl font-bold text-crema mb-8">
-                {questions[currentQuestion].question}
-              </h3>
-
-              <div className="space-y-3">
-                {questions[currentQuestion].options.map((option, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleAnswer(i)}
-                    className="w-full text-left font-sans bg-crema/5 hover:bg-morado/20 border border-crema/10 hover:border-morado/40 text-crema px-6 py-4 rounded-xl transition-all text-sm"
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div className="text-center">
-              <div className="w-16 h-16 bg-amarillo/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-amarillo text-2xl">&#10003;</span>
-              </div>
-              <h3 className="text-2xl font-bold text-crema mb-4">
-                ¡Listo! Ya tengo tu perfil
-              </h3>
-              <p className="font-sans text-crema/70 mb-8 leading-relaxed">
-                Basado en tus respuestas, tengo recomendaciones personalizadas
-                para ti. Déjame tu email abajo y te las envío directamente.
-              </p>
-              <div className="flex gap-4 justify-center">
-                <a
-                  href="#formulario"
-                  className="inline-block bg-amarillo hover:bg-amarillo/90 text-oscuro font-sans font-semibold px-8 py-3 rounded-full transition-colors text-sm"
-                >
-                  Recibir mis resultados
-                </a>
-                <button
-                  onClick={reset}
-                  className="font-sans text-crema/50 hover:text-crema text-sm transition-colors"
-                >
-                  Repetir quiz
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+        <p className="font-sans text-sm font-light text-white/55 mb-12">
+          Selecciona la que mas te identifique 👇
+        </p>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-[680px] mx-auto mb-10 reveal">
+        {options.map((opt) => (
+          <button
+            key={opt.key}
+            onClick={() => setSelected(opt.key)}
+            className={`text-left p-6 border transition-all duration-200 relative overflow-hidden ${
+              selected === opt.key
+                ? "bg-amarillo/[0.12] border-amarillo"
+                : "bg-white/[0.06] border-white/10 hover:bg-amarillo/[0.12] hover:border-amarillo"
+            }`}
+          >
+            {selected === opt.key && (
+              <span className="absolute top-3 right-4 text-amarillo text-sm font-bold">
+                ✓
+              </span>
+            )}
+            <span className="text-[28px] block mb-2.5">{opt.emoji}</span>
+            <div className="font-sans text-[13px] font-medium text-white leading-snug">
+              {opt.text}
+            </div>
+            <div className="font-sans text-[11px] font-light text-white/40 mt-1">
+              {opt.sub}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Result */}
+      {selected && (
+        <div className="bg-amarillo/10 border border-amarillo/25 p-7 max-w-[680px] mx-auto mb-8 text-left">
+          <div className="font-sans text-[9px] font-bold uppercase tracking-[2px] text-amarillo mb-2.5">
+            Para ti en particular →
+          </div>
+          <div className="font-display text-xl italic text-white leading-snug">
+            {results[selected]}
+          </div>
+        </div>
+      )}
+
+      {selected && (
+        <a
+          href="#contacto"
+          className="inline-block font-sans text-[11px] font-bold uppercase tracking-[2px] bg-amarillo text-oscuro px-8 py-4 hover:bg-white transition-colors"
+        >
+          Quiero ese contenido →
+        </a>
+      )}
     </section>
   );
 }

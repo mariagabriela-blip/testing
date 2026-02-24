@@ -2,42 +2,97 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-oscuro text-crema px-6 py-24 overflow-hidden">
-      {/* Decorative accent */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-morado via-naranja to-amarillo" />
-
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Logo morado */}
-        <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 rounded-2xl overflow-hidden">
-          <Image src="/6.png" alt="Logo Gabriela" width={128} height={128} className="w-full h-full object-cover" />
+    <section className="min-h-screen bg-morado grid grid-cols-1 md:grid-cols-2 overflow-hidden pt-20">
+      {/* Left — text */}
+      <div className="flex flex-col justify-center px-6 md:px-[60px] py-20 md:py-20 relative z-10">
+        <div
+          className="inline-flex items-center gap-2 bg-amarillo/15 border border-amarillo/30 px-4 py-2 rounded-full w-fit mb-8 animate-fade-up"
+          style={{ animationDelay: "0.1s" }}
+        >
+          <span className="font-sans text-[10px] font-medium uppercase tracking-[1.5px] text-amarillo">
+            Estrategia con base real
+          </span>
         </div>
 
-        <p className="font-sans text-sm uppercase tracking-[0.3em] text-amarillo mb-6">
-          Economista &middot; Estratega de Negocios
-        </p>
-
-        <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-          Gabriela Kurtagic
+        <h1
+          className="font-display text-[clamp(48px,5.5vw,80px)] font-extrabold leading-[0.95] tracking-tight text-white mb-7 animate-fade-up"
+          style={{ animationDelay: "0.25s" }}
+        >
+          Los numeros<br />
+          <em className="text-amarillo">siempre</em><br />
+          cuentan algo.
         </h1>
 
-        <p className="font-sans text-lg md:text-xl text-crema/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Ayudo a emprendedores latinos en USA a construir negocios
-          rentables con estrategia, claridad y propósito.
+        <p
+          className="font-sans text-[15px] font-light leading-[1.75] text-white/60 max-w-[400px] mb-11 animate-fade-up"
+          style={{ animationDelay: "0.4s" }}
+        >
+          Finanzas, negocios y marca para emprendedores latinos que quieren
+          crecer con estructura — no con suerte.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div
+          className="flex flex-wrap gap-4 animate-fade-up"
+          style={{ animationDelay: "0.55s" }}
+        >
           <a
-            href="#quiz"
-            className="inline-block bg-morado hover:bg-morado/90 text-white font-sans font-semibold px-8 py-4 rounded-full transition-colors text-base"
+            href="#contacto"
+            className="font-sans text-[11px] font-bold uppercase tracking-[2px] bg-amarillo text-oscuro px-8 py-4 hover:bg-white transition-colors"
           >
-            Descubre tu perfil emprendedor
+            Quiero aprender
           </a>
           <a
-            href="#servicios"
-            className="inline-block border-2 border-amarillo text-amarillo hover:bg-amarillo hover:text-oscuro font-sans font-semibold px-8 py-4 rounded-full transition-colors text-base"
+            href="#sobre-mi"
+            className="font-sans text-[11px] font-bold uppercase tracking-[2px] text-white border border-white/30 px-8 py-4 hover:border-white hover:bg-white/[0.07] transition-all"
           >
-            Ver servicios
+            Conoce mi trabajo
           </a>
+        </div>
+
+        <div
+          className="flex items-center gap-4 mt-12 animate-fade-up"
+          style={{ animationDelay: "0.7s" }}
+        >
+          <div className="w-8 h-px bg-white/20" />
+          <span className="font-sans text-[10px] font-medium uppercase tracking-[1.5px] text-white/35">
+            Sigueme
+          </span>
+          <a
+            href="https://instagram.com/gabrielakurtagic"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-sans text-[10px] font-medium tracking-[1px] text-white/50 border-b border-white/20 hover:text-amarillo transition-colors"
+          >
+            @gabrielakurtagic
+          </a>
+        </div>
+      </div>
+
+      {/* Right — logo + decorative g */}
+      <div className="relative hidden md:flex items-end justify-center overflow-hidden animate-fade-in" style={{ animationDelay: "0.5s" }}>
+        {/* Giant background g */}
+        <span className="absolute -bottom-10 -right-10 font-display text-[520px] font-black text-amarillo/[0.08] leading-none select-none pointer-events-none">
+          g
+        </span>
+
+        {/* Logo morado */}
+        <div className="relative z-10 w-[360px] h-[480px] flex items-center justify-center">
+          <Image
+            src="/6.png"
+            alt="Logo Gabriela"
+            width={320}
+            height={320}
+            className="w-[280px] h-[280px] object-cover"
+          />
+          {/* Badge */}
+          <div className="absolute bottom-10 -left-5 bg-amarillo p-4 z-20">
+            <div className="font-display text-[32px] font-extrabold text-oscuro leading-none tracking-tight">
+              10+
+            </div>
+            <div className="font-sans text-[9px] font-bold uppercase tracking-[1.5px] text-oscuro/60 mt-0.5">
+              Anos en finanzas
+            </div>
+          </div>
         </div>
       </div>
     </section>

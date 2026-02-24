@@ -1,41 +1,52 @@
 export default function Footer() {
   return (
-    <footer className="bg-oscuro border-t border-crema/10 py-12 px-6">
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-lg overflow-hidden">
-            <img src="/10.png" alt="Logo Gabriela" className="w-full h-full object-cover" />
-          </div>
-          <div>
-            <p className="font-display text-xl font-bold text-crema">
-              Gabriela Kurtagic
-            </p>
-            <p className="font-sans text-crema/50 text-sm mt-1">
-              Estrategia de negocios para el mercado latino en USA
-            </p>
-          </div>
+    <footer className="bg-oscuro px-6 md:px-[60px] pt-14 pb-10 border-t border-crema/[0.06]">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-10 gap-5">
+        <div className="font-display text-[28px] font-extrabold text-amarillo tracking-tight">
+          g<span className="text-naranja">.</span>
         </div>
 
-        <div className="flex gap-6 font-sans text-sm text-crema/60">
-          <a href="#sobre-mi" className="hover:text-amarillo transition-colors">
-            Sobre mí
-          </a>
-          <a href="#servicios" className="hover:text-amarillo transition-colors">
-            Servicios
-          </a>
-          <a href="#quiz" className="hover:text-amarillo transition-colors">
-            Quiz
-          </a>
-          <a href="#formulario" className="hover:text-amarillo transition-colors">
-            Contacto
-          </a>
+        <ul className="flex flex-wrap gap-7">
+          <li>
+            <a
+              href="#sobre-mi"
+              className="font-sans text-[10px] font-medium uppercase tracking-[1.5px] text-crema/30 hover:text-crema transition-colors"
+            >
+              Sobre mi
+            </a>
+          </li>
+          <li>
+            <a
+              href="#servicios"
+              className="font-sans text-[10px] font-medium uppercase tracking-[1.5px] text-crema/30 hover:text-crema transition-colors"
+            >
+              Contenido
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://instagram.com/gabrielakurtagic"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-[10px] font-medium uppercase tracking-[1.5px] text-crema/30 hover:text-crema transition-colors"
+            >
+              Instagram ↗
+            </a>
+          </li>
+        </ul>
+
+        <div className="font-sans text-[11px] font-light text-crema/25 tracking-wide">
+          Estrategia · Finanzas · Marca
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto mt-8 pt-8 border-t border-crema/5 text-center">
-        <p className="font-sans text-xs text-crema/30">
+      <div className="flex flex-col md:flex-row items-center justify-between border-t border-crema/[0.06] pt-6 gap-3">
+        <div className="font-sans text-[10px] font-light text-crema/20 tracking-wide">
           &copy; {new Date().getFullYear()} Gabriela Kurtagic. Todos los derechos reservados.
-        </p>
+        </div>
+        <div className="font-sans text-[10px] font-light text-crema/20 tracking-wide">
+          Hecho con 💛 en Jacksonville, FL
+        </div>
       </div>
     </footer>
   );

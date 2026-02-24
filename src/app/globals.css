@@ -10,10 +10,15 @@
   --color-verde: #1A5C3A;
   --color-oscuro: #110D1A;
 
-  /* Font families — CSS variables inyectadas por next/font/local.
-     Mientras no estén los .ttf, usamos system fallbacks. */
+  /* Font families */
   --font-display: var(--font-bodoni, "Bodoni Moda", "Georgia", serif);
   --font-sans: var(--font-futura, "Futura PT", system-ui, -apple-system, sans-serif);
+
+  /* Animation */
+  --animate-ticker: ticker 25s linear infinite;
+  --animate-fade-up: fadeUp 0.7s ease forwards;
+  --animate-fade-in: fadeIn 1s ease forwards;
+  --animate-spin-slow: rotateSlow 12s linear infinite;
 }
 
 /* Base styles */
@@ -21,8 +26,66 @@ body {
   background-color: var(--color-crema);
   color: var(--color-oscuro);
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
+}
+
+/* Ticker */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Fade animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Service card hover line */
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-amarillo);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.service-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* Italic accent color for headings */
+h1 em, h2 em, h3 em {
+  font-style: italic;
 }
