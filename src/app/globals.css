@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Color palette */
+  --color-morado: #6B3FCC;
+  --color-amarillo: #F5D76E;
+  --color-naranja: #E8601C;
+  --color-crema: #F5F0E8;
+  --color-vinotinto: #6B1F3A;
+  --color-verde: #1A5C3A;
+  --color-oscuro: #110D1A;
+
+  /* Font families — CSS variables inyectadas por next/font/local.
+     Mientras no estén los .ttf, usamos system fallbacks. */
+  --font-display: var(--font-bodoni, "Bodoni Moda", "Georgia", serif);
+  --font-sans: var(--font-futura, "Futura PT", system-ui, -apple-system, sans-serif);
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-crema);
+  color: var(--color-oscuro);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
