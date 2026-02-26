@@ -177,7 +177,7 @@ export const posts: Post[] = [
           "El carro, los viajes, la laptop en la playa. Pero nunca el balance ni el cash flow.",
         ],
         emoji: "🚩",
-        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.naranja },
+        style: { bg: COLORS.oscuro, textColor: COLORS.blanco, accentColor: COLORS.naranja },
       },
       {
         type: "numero",
@@ -188,7 +188,7 @@ export const posts: Post[] = [
           "Si la única forma de aprender es pagándoles a ellos, algo está mal.",
         ],
         emoji: "🚩",
-        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.naranja },
+        style: { bg: COLORS.vinotinto, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "cta",
@@ -344,7 +344,7 @@ export const posts: Post[] = [
           "Si gastas $100 en publicidad y consigues 2 clientes — cada cliente te costó $50.",
           "¿Tu producto o servicio justifica ese costo? ¿Cuánto te deja ese cliente?",
         ],
-        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
+        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.morado },
       },
       {
         type: "numero",
@@ -354,7 +354,7 @@ export const posts: Post[] = [
           "6 meses, 1 año, 2 años. Escríbelo.",
           "Si no puedes esperar ese tiempo, eso es información importante.",
         ],
-        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
+        style: { bg: COLORS.oscuro, textColor: COLORS.amarillo, accentColor: COLORS.amarillo },
       },
       {
         type: "numero",
@@ -364,7 +364,7 @@ export const posts: Post[] = [
           "¿Puedes sobrevivir? ¿Tienes colchón? ¿Tienes plan B?",
           "No para asustarte — para que tomes decisiones con los ojos abiertos.",
         ],
-        style: { bg: COLORS.naranja, textColor: COLORS.blanco },
+        style: { bg: COLORS.vinotinto, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "numero",
@@ -501,7 +501,7 @@ export const posts: Post[] = [
           "Transfiérelo esa cantidad a tu cuenta personal — no más, no menos.",
           "Lo que queda en la cuenta del negocio, es del negocio. No tuyo para gastar.",
         ],
-        style: { bg: COLORS.verde, textColor: COLORS.blanco },
+        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.verde },
       },
       {
         type: "numero",
@@ -513,7 +513,7 @@ export const posts: Post[] = [
           "Excel o Google Sheets (te enseño en próximos posts).",
           "Lo importante: cada dólar que entra y sale, registrado.",
         ],
-        style: { bg: COLORS.verde, textColor: COLORS.blanco },
+        style: { bg: COLORS.oscuro, textColor: COLORS.blanco, accentColor: COLORS.verde },
       },
       {
         type: "lista",
@@ -604,7 +604,7 @@ export const posts: Post[] = [
           "¿Cuenta personal, cuenta del negocio, lo que te deben… ¿lo sabes?",
           "Si tienes que 'calcular' la respuesta — necesitas un sistema.",
         ],
-        style: { bg: COLORS.naranja, textColor: COLORS.blanco },
+        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.naranja },
       },
       {
         type: "numero",
@@ -614,7 +614,7 @@ export const posts: Post[] = [
           "¿Lanzo este producto? ¿Contrato a alguien? ¿Bajo el precio?",
           "Si la respuesta viene de la intuición y no de los números — es una señal.",
         ],
-        style: { bg: COLORS.naranja, textColor: COLORS.blanco },
+        style: { bg: COLORS.oscuro, textColor: COLORS.blanco, accentColor: COLORS.naranja },
       },
       {
         type: "numero",
@@ -625,7 +625,7 @@ export const posts: Post[] = [
           "Eso es síntoma de que el flujo de caja no alcanza para absorberlas.",
           "Hay que verlo con números para entender por qué.",
         ],
-        style: { bg: COLORS.naranja, textColor: COLORS.blanco },
+        style: { bg: COLORS.vinotinto, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "numero",
@@ -635,7 +635,7 @@ export const posts: Post[] = [
           "Vender no es ganar. Rentabilidad es lo que queda después de todos los costos.",
           "Si no puedes responder: ¿cuánto gano por cada dólar que vendo? — necesitas los números.",
         ],
-        style: { bg: COLORS.naranja, textColor: COLORS.blanco },
+        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "contenido",
@@ -763,7 +763,7 @@ export const posts: Post[] = [
           "Tu salario mínimo: $2,000",
           "Total fijo: $3,050/mes",
         ],
-        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
+        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.morado },
       },
       {
         type: "numero",
@@ -775,7 +775,7 @@ export const posts: Post[] = [
           "Ejemplo: $3,050 ÷ ($50 - $22) = $3,050 ÷ $28 = 109 unidades/mes",
           "Ese es tu punto de equilibrio. Por encima de eso: ganancia.",
         ],
-        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
+        style: { bg: COLORS.oscuro, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "numero",
@@ -787,7 +787,7 @@ export const posts: Post[] = [
           "Si no: necesitas subir el precio o bajar los costos (o ambos).",
           "Este es el análisis que te da claridad para tomar decisiones.",
         ],
-        style: { bg: COLORS.verde, textColor: COLORS.blanco },
+        style: { bg: COLORS.verde, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "cta",
@@ -868,7 +868,7 @@ export const posts: Post[] = [
           "Cuando está separado, defines un salario. Y respetas ese número.",
           "Eso cambia tu relación con el dinero — y con el negocio.",
         ],
-        style: { bg: COLORS.verde, textColor: COLORS.blanco },
+        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.verde },
       },
       {
         type: "numero",
@@ -880,7 +880,7 @@ export const posts: Post[] = [
           "El contador (o la misma) puede trabajar con eso.",
           "Sin separación: horas reconstruyendo transacciones, y probablemente pagando de más.",
         ],
-        style: { bg: COLORS.verde, textColor: COLORS.blanco },
+        style: { bg: COLORS.oscuro, textColor: COLORS.blanco, accentColor: COLORS.verde },
       },
       {
         type: "contenido",
@@ -1006,7 +1006,7 @@ export const posts: Post[] = [
           "Ejemplo: $2,500/mes",
           "Escríbelo. Costos fijos = ___",
         ],
-        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
+        style: { bg: COLORS.crema, textColor: COLORS.oscuro, accentColor: COLORS.morado },
       },
       {
         type: "numero",
@@ -1017,7 +1017,7 @@ export const posts: Post[] = [
           "Ejemplo: $6,000 en ventas.",
           "Escríbelo. Ventas del mes = ___",
         ],
-        style: { bg: COLORS.morado, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
+        style: { bg: COLORS.oscuro, textColor: COLORS.amarillo, accentColor: COLORS.amarillo },
       },
       {
         type: "numero",
@@ -1029,7 +1029,7 @@ export const posts: Post[] = [
           "Si vendes 100 unidades: $6,000 – $2,500 – $2,500 = $1,000 de ganancia.",
           "¿Ese número te paga a ti? ¿La promesa crecer?",
         ],
-        style: { bg: COLORS.verde, textColor: COLORS.blanco },
+        style: { bg: COLORS.verde, textColor: COLORS.blanco, accentColor: COLORS.amarillo },
       },
       {
         type: "contenido",

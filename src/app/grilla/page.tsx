@@ -15,35 +15,37 @@ function PostCard({ post, onClick }: { post: Post; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className="text-left w-full group cursor-pointer transition-transform hover:-translate-y-1"
+      className="text-left w-full group cursor-pointer transition-all duration-300 hover:-translate-y-1.5"
     >
       {/* Mini preview of first slide */}
-      <div className="w-full aspect-square overflow-hidden shadow-md mb-3 relative">
+      <div className="w-full aspect-[4/5] overflow-hidden rounded-sm shadow-md mb-3 relative ring-1 ring-black/5 group-hover:shadow-xl group-hover:ring-[#6B3FCC]/20 transition-all duration-300">
         <div className="w-[360px] h-[450px] origin-top-left" style={{ transform: "scale(0.56)" }}>
           <SlideRenderer slide={post.slides[0]} />
         </div>
         {/* Slide count badge */}
-        <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded-sm font-[family-name:var(--font-futura)]">
+        <div className="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-[10px] font-bold px-2.5 py-1 rounded-sm font-[family-name:var(--font-futura)]">
           {post.slides.length} slides
         </div>
+        {/* Hover overlay */}
+        <div className="absolute inset-0 bg-[#6B3FCC]/0 group-hover:bg-[#6B3FCC]/5 transition-colors duration-300" />
       </div>
       {/* Info */}
       <div className="space-y-1.5">
         <div className="flex items-center gap-2">
           <span
-            className="text-[9px] font-bold tracking-[1.5px] uppercase px-2 py-0.5 font-[family-name:var(--font-futura)]"
+            className="text-[9px] font-bold tracking-[1.5px] uppercase px-2 py-0.5 rounded-sm font-[family-name:var(--font-futura)]"
             style={{ background: formato.color, color: "white" }}
           >
             {formato.emoji} {formato.label}
           </span>
-          <span className="text-[9px] font-medium tracking-[1px] uppercase text-[#110D1A]/40 font-[family-name:var(--font-futura)]">
+          <span className="text-[9px] font-medium tracking-[1px] uppercase text-[#110D1A]/30 font-[family-name:var(--font-futura)]">
             Post {post.id}
           </span>
         </div>
         <h3 className="font-[family-name:var(--font-bodoni)] text-[15px] font-bold leading-tight text-[#110D1A] group-hover:text-[#6B3FCC] transition-colors">
           {post.titulo}
         </h3>
-        <p className="text-[10px] font-medium tracking-[1px] uppercase font-[family-name:var(--font-futura)]" style={{ color: post.pilarColor, opacity: 0.7 }}>
+        <p className="text-[10px] font-medium tracking-[1px] uppercase font-[family-name:var(--font-futura)]" style={{ color: post.pilarColor, opacity: 0.6 }}>
           {post.pilar}
         </p>
       </div>
@@ -57,12 +59,12 @@ function SlideViewer({ post, onClose }: { post: Post; onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center backdrop-blur-sm">
-      <div className="max-w-[1100px] w-full mx-4 bg-[#F5F0E8] shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
+      <div className="max-w-[1100px] w-full mx-4 bg-[#F5F0E8] shadow-2xl overflow-hidden max-h-[95vh] flex flex-col rounded-sm">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-black/10">
           <div className="flex items-center gap-3">
             <span
-              className="text-[9px] font-bold tracking-[1.5px] uppercase px-2 py-1 font-[family-name:var(--font-futura)]"
+              className="text-[9px] font-bold tracking-[1.5px] uppercase px-2 py-1 rounded-sm font-[family-name:var(--font-futura)]"
               style={{ background: formato.color, color: "white" }}
             >
               {formato.emoji} {formato.label}
@@ -73,7 +75,7 @@ function SlideViewer({ post, onClose }: { post: Post; onClose: () => void }) {
           </div>
           <button
             onClick={onClose}
-            className="text-[#110D1A]/50 hover:text-[#110D1A] transition-colors text-2xl leading-none cursor-pointer"
+            className="text-[#110D1A]/50 hover:text-[#110D1A] transition-colors text-2xl leading-none cursor-pointer w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5"
           >
             ✕
           </button>
@@ -104,8 +106,8 @@ function SlideViewer({ post, onClose }: { post: Post; onClose: () => void }) {
                 <button
                   key={i}
                   onClick={() => setCurrentSlide(i)}
-                  className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-                    i === currentSlide ? "bg-[#6B3FCC] w-6" : "bg-[#110D1A]/20"
+                  className={`h-2 rounded-full transition-all cursor-pointer ${
+                    i === currentSlide ? "bg-[#6B3FCC] w-6" : "bg-[#110D1A]/20 w-2"
                   }`}
                 />
               ))}
@@ -124,7 +126,7 @@ function SlideViewer({ post, onClose }: { post: Post; onClose: () => void }) {
                   <button
                     key={i}
                     onClick={() => setCurrentSlide(i)}
-                    className={`aspect-[4/5] overflow-hidden cursor-pointer transition-all ${
+                    className={`aspect-[4/5] overflow-hidden cursor-pointer transition-all rounded-sm ${
                       i === currentSlide
                         ? "ring-2 ring-[#6B3FCC] ring-offset-1"
                         : "opacity-60 hover:opacity-100"
@@ -153,6 +155,8 @@ function SlideViewer({ post, onClose }: { post: Post; onClose: () => void }) {
     </div>
   );
 }
+
+const semanaColors = ["#E8601C", "#6B3FCC", "#1A5C3A", "#6B1F3A"];
 
 export default function GrillaPage() {
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
@@ -185,7 +189,7 @@ export default function GrillaPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveSemana(null)}
-              className={`text-[10px] font-bold tracking-[1.5px] uppercase px-4 py-2 transition-all cursor-pointer font-[family-name:var(--font-futura)] ${
+              className={`text-[10px] font-bold tracking-[1.5px] uppercase px-4 py-2 transition-all cursor-pointer font-[family-name:var(--font-futura)] rounded-sm ${
                 activeSemana === null
                   ? "bg-[#110D1A] text-[#F5F0E8]"
                   : "bg-[#110D1A]/5 text-[#110D1A]/50 hover:text-[#110D1A]"
@@ -197,11 +201,14 @@ export default function GrillaPage() {
               <button
                 key={s.num}
                 onClick={() => setActiveSemana(s.num)}
-                className={`text-[10px] font-bold tracking-[1.5px] uppercase px-4 py-2 transition-all cursor-pointer font-[family-name:var(--font-futura)] ${
+                className={`text-[10px] font-bold tracking-[1.5px] uppercase px-4 py-2 transition-all cursor-pointer font-[family-name:var(--font-futura)] rounded-sm ${
                   activeSemana === s.num
-                    ? "bg-[#6B3FCC] text-white"
-                    : "bg-[#6B3FCC]/5 text-[#6B3FCC]/50 hover:text-[#6B3FCC]"
+                    ? "text-white"
+                    : "text-[#110D1A]/40 hover:text-[#110D1A]"
                 }`}
+                style={{
+                  background: activeSemana === s.num ? semanaColors[s.num - 1] : `${semanaColors[s.num - 1]}10`,
+                }}
               >
                 Semana {s.num}
               </button>
@@ -212,36 +219,40 @@ export default function GrillaPage() {
 
       {/* Content */}
       <main className="max-w-[1400px] mx-auto px-6 py-8">
-        {/* Semana sections */}
         {(activeSemana ? semanas.filter((s) => s.num === activeSemana) : semanas).map((semana) => {
           const semanaPosts = filteredPosts.filter((p) => p.semana === semana.num);
           if (semanaPosts.length === 0) return null;
+          const color = semanaColors[semana.num - 1];
 
           return (
             <section key={semana.num} className="mb-16">
-              {/* Semana header */}
-              <div
-                className="px-6 py-5 mb-6"
-                style={{
-                  background:
-                    semana.num === 1
-                      ? "#E8601C"
-                      : semana.num === 2
-                      ? "#6B3FCC"
-                      : semana.num === 3
-                      ? "#1A5C3A"
-                      : "#6B1F3A",
-                }}
-              >
-                <h2 className="font-[family-name:var(--font-bodoni)] text-[28px] font-extrabold text-white">
-                  Semana {semana.num}
-                </h2>
-                <p className="font-[family-name:var(--font-bodoni)] text-[16px] italic text-white/70 mt-1">
-                  &ldquo;{semana.tema}&rdquo;
-                </p>
-                <p className="text-[10px] font-medium tracking-[1.5px] uppercase text-white/40 mt-2 font-[family-name:var(--font-futura)]">
-                  {semana.dias}
-                </p>
+              {/* Semana header — redesigned with accent bar + geometric element */}
+              <div className="relative overflow-hidden rounded-sm mb-6" style={{ background: color }}>
+                {/* Decorative circle */}
+                <div
+                  className="absolute -top-10 -right-10 w-[140px] h-[140px] rounded-full pointer-events-none"
+                  style={{ background: "white", opacity: 0.06 }}
+                />
+                <div
+                  className="absolute bottom-0 right-20 w-[60px] h-[60px] rounded-full pointer-events-none"
+                  style={{ background: "white", opacity: 0.03 }}
+                />
+
+                <div className="relative z-10 px-6 py-5">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
+                    <span className="text-[10px] font-bold tracking-[2px] uppercase text-white/40 font-[family-name:var(--font-futura)]">
+                      {semana.dias}
+                    </span>
+                  </div>
+                  <h2 className="font-[family-name:var(--font-bodoni)] text-[28px] font-extrabold text-white">
+                    Semana {semana.num}
+                  </h2>
+                  <div className="w-8 h-[2px] bg-white/20 mt-2 mb-2" />
+                  <p className="font-[family-name:var(--font-bodoni)] text-[16px] italic text-white/60">
+                    &ldquo;{semana.tema}&rdquo;
+                  </p>
+                </div>
               </div>
 
               {/* Posts grid */}
