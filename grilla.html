@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grilla de Contenido — Gabriela Kurtagic</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:#F5F0E8; color:#110D1A; }
+
+.page-header { border-bottom:1px solid rgba(17,13,26,0.1); padding:20px 24px; position:sticky; top:0; z-index:40; background:rgba(245,240,232,0.95); backdrop-filter:blur(12px); }
+.header-inner { max-width:1400px; margin:0 auto; }
+.header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.logo { font-family:'Bodoni Moda',serif; font-size:28px; font-weight:800; color:#6B3FCC; text-decoration:none; }
+.logo span { color:#E8601C; }
+.header-title { font-family:'Bodoni Moda',serif; font-size:24px; font-weight:800; text-align:right; }
+.header-sub { font-size:11px; font-weight:500; letter-spacing:1.5px; text-transform:uppercase; color:rgba(17,13,26,0.4); text-align:right; }
+
+.main { max-width:1400px; margin:0 auto; padding:32px 24px; }
+
+/* Semana header */
+.semana-header { position:relative; overflow:hidden; border-radius:2px; margin-bottom:24px; padding:20px 24px; }
+.semana-header .sh-circle1 { position:absolute; top:-40px; right:-40px; width:140px; height:140px; border-radius:50%; background:white; opacity:0.06; pointer-events:none; }
+.semana-header .sh-circle2 { position:absolute; bottom:0; right:80px; width:60px; height:60px; border-radius:50%; background:white; opacity:0.03; pointer-events:none; }
+.sh-dias { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.sh-dias-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.5); }
+.sh-dias-text { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+.sh-title { font-family:'Bodoni Moda',serif; font-size:28px; font-weight:800; color:white; }
+.sh-divider { width:32px; height:2px; background:rgba(255,255,255,0.2); margin:8px 0; }
+.sh-tema { font-family:'Bodoni Moda',serif; font-size:16px; font-style:italic; color:rgba(255,255,255,0.6); }
+
+.semana-section { margin-bottom:64px; }
+
+/* Post grid */
+.posts-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+@media(max-width:1024px){ .posts-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:640px){ .posts-grid { grid-template-columns:1fr; } }
+
+.post-card { }
+.post-card-label { margin-bottom:12px; }
+.post-label-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }
+.formato-badge { font-size:9px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:2px 8px; border-radius:2px; color:white; }
+.post-num { font-size:9px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:rgba(17,13,26,0.3); }
+.post-title { font-family:'Bodoni Moda',serif; font-size:15px; font-weight:700; line-height:1.3; margin-bottom:4px; }
+.post-pilar { font-size:10px; font-weight:500; letter-spacing:1px; text-transform:uppercase; opacity:0.6; }
+
+/* Carousel */
+.carousel-container { margin-bottom:8px; }
+.carousel-label { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:rgba(17,13,26,0.35); margin-bottom:8px; }
+.carousel-track { display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; }
+.carousel-track::-webkit-scrollbar { height:4px; }
+.carousel-track::-webkit-scrollbar-track { background:rgba(17,13,26,0.05); border-radius:2px; }
+.carousel-track::-webkit-scrollbar-thumb { background:rgba(17,13,26,0.15); border-radius:2px; }
+
+/* Slide */
+.slide { width:360px; height:450px; flex-shrink:0; position:relative; overflow:hidden; scroll-snap-align:start; box-shadow:0 4px 20px rgba(0,0,0,0.12); }
+
+.slide-inner { position:relative; z-index:10; padding:36px; display:flex; flex-direction:column; height:100%; }
+
+/* Decorative elements */
+.deco-circle { position:absolute; border-radius:50%; pointer-events:none; }
+.dot-pattern-tr { position:absolute; top:24px; right:24px; display:grid; grid-template-columns:repeat(4,1fr); gap:5px; pointer-events:none; }
+.pattern-dot { width:2px; height:2px; border-radius:50%; }
+
+/* PORTADA */
+.portada-inner { justify-content:space-between; }
+.top-tag { display:flex; align-items:center; gap:10px; }
+.dot { width:6px; height:6px; border-radius:50%; }
+.tag-text { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; opacity:0.5; }
+.portada-center { flex:1; display:flex; flex-direction:column; justify-content:center; padding:16px 0; }
+.portada-title { font-family:'Bodoni Moda',serif; font-size:clamp(34px,7vw,50px); font-weight:800; line-height:0.92; letter-spacing:-0.5px; }
+.portada-subtitle { font-family:'Bodoni Moda',serif; font-size:clamp(18px,3.5vw,27px); font-weight:700; line-height:1.12; font-style:italic; margin-top:16px; }
+.portada-bottom { display:flex; align-items:flex-end; justify-content:space-between; }
+.handle { font-size:9px; font-weight:500; letter-spacing:2px; text-transform:uppercase; opacity:0.3; }
+.dot-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-right:24px; }
+.grid-dot { width:3px; height:3px; border-radius:50%; }
+.g-logo { font-family:'Bodoni Moda',serif; font-size:26px; font-weight:800; }
+
+/* CONTENIDO */
+.contenido-inner { justify-content:center; }
+.contenido-title-block { margin-bottom:20px; }
+.contenido-title { font-family:'Bodoni Moda',serif; font-size:22px; font-weight:700; line-height:1.2; font-style:italic; }
+.contenido-body { display:flex; flex-direction:column; gap:14px; }
+.body-line { font-size:13.5px; font-weight:300; line-height:1.65; opacity:0.85; }
+.slide-footer { margin-top:auto; padding-top:32px; display:flex; align-items:center; gap:8px; }
+.g-logo-sm { font-family:'Bodoni Moda',serif; font-size:16px; font-weight:800; }
+
+/* NUMERO */
+.numero-watermark { position:absolute; top:-16px; right:-12px; font-family:'Bodoni Moda',serif; font-size:180px; font-weight:800; line-height:1; pointer-events:none; }
+.numero-inner { }
+.numero-badge-row { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.numero-badge { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; font-family:'Bodoni Moda',serif; font-size:18px; font-weight:800; border-radius:2px; }
+.numero-emoji { font-size:24px; }
+.numero-title { font-family:'Bodoni Moda',serif; font-size:19px; font-weight:700; line-height:1.25; margin-bottom:16px; }
+.numero-body { display:flex; flex-direction:column; gap:10px; }
+
+/* LISTA */
+.lista-inner { justify-content:center; }
+.lista-title-block { margin-bottom:24px; }
+.lista-title { font-family:'Bodoni Moda',serif; font-size:21px; font-weight:700; line-height:1.25; font-style:italic; }
+.lista-items { display:flex; flex-direction:column; gap:16px; }
+.lista-item { display:flex; align-items:flex-start; gap:12px; }
+.lista-bullet-outer { width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+.lista-bullet-inner { width:5px; height:5px; border-radius:50%; }
+.lista-text { font-size:13px; font-weight:300; line-height:1.6; opacity:0.9; }
+
+/* CTA */
+.cta-ring { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); border-radius:50%; border:1px solid; pointer-events:none; }
+.cta-inner { align-items:center; justify-content:center; text-align:center; }
+.cta-prebody { display:flex; flex-direction:column; gap:8px; margin-bottom:24px; }
+.cta-preline { font-size:13px; font-weight:500; opacity:0.75; }
+.cta-main { margin-bottom:16px; }
+.cta-deco-line { display:flex; align-items:center; justify-content:center; gap:12px; }
+.cta-title { font-family:'Bodoni Moda',serif; font-size:23px; font-weight:800; line-height:1.2; font-style:italic; margin:16px 0; }
+.cta-subtitle { font-size:12px; font-weight:300; line-height:1.6; max-width:260px; opacity:0.6; white-space:pre-line; }
+.cta-arrow { font-size:18px; opacity:0.3; margin-top:20px; }
+.cta-bottom { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; z-index:10; }
+
+/* QUOTE */
+.quote-mark { position:absolute; top:16px; left:28px; font-family:'Bodoni Moda',serif; font-size:140px; line-height:1; pointer-events:none; }
+.quote-inner { justify-content:space-between; }
+.quote-center { flex:1; display:flex; flex-direction:column; justify-content:center; }
+.quote-title { font-family:'Bodoni Moda',serif; font-size:clamp(30px,5.5vw,44px); font-weight:800; line-height:0.95; letter-spacing:-0.5px; }
+.quote-subtitle { font-family:'Bodoni Moda',serif; font-size:clamp(18px,3vw,28px); font-weight:700; line-height:1.15; font-style:italic; margin-top:16px; white-space:pre-line; }
+.quote-bottom { display:flex; align-items:center; justify-content:space-between; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-top">
+      <a class="logo" href="#">g<span>.</span></a>
+      <div>
+        <div class="header-title">Grilla de Contenido</div>
+        <div class="header-sub">Mes 1 · 16 posts · 4 semanas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+<section class="semana-section">
+    <div class="semana-header" style="background:#E8601C;">
+      <div class="sh-circle1"></div>
+      <div class="sh-circle2"></div>
+      <div style="position:relative;z-index:10;">
+        <div class="sh-dias">
+          <div class="sh-dias-dot"></div>
+          <span class="sh-dias-text">Lunes · Miércoles · Viernes · Domingo</span>
+        </div>
+        <div class="sh-title">Semana 1</div>
+        <div class="sh-divider"></div>
+        <div class="sh-tema">&ldquo;Llegué. Esto es lo que hago.&rdquo;</div>
+      </div>
+    </div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 1</span>
+      </div>
+      <div class="post-title">No soy coach. Esto es lo que soy.</div>
+      <div class="post-pilar" style="color:#E8601C;">Marca &amp; estrategia</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#FAFAF8;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#FAFAF8;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#FAFAF8;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#FAFAF8;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#FAFAF8;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">No soy coach.</h2>
+        <p class="portada-subtitle" style="color:#FAFAF8;opacity:0.65;">Esto es lo que soy.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#FAFAF8;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#6B3FCC;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#6B3FCC;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#6B3FCC;">Quién soy</h3>
+        <div style="width:32px;height:2px;background:#6B3FCC;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Soy economista.</p><p class="body-line">Llevo las finanzas de una empresa real.</p><p class="body-line">Fundé Wave Strategy Group.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#6B3FCC;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5F0E8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Qué hago aquí</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Aquí hablo de negocios, marcas y finanzas con base real.</p><p class="body-line">No promesas. No fórmulas mágicas.</p><p class="body-line">Estrategia que se puede ejecutar.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div style="position:absolute;top:0;right:0;width:100px;height:100px;background:linear-gradient(135deg,rgba(245,215,110,0.07) 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="deco-circle" style="bottom:-24px;left:-24px;width:80px;height:80px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="slide-inner lista-inner">
+      <div class="lista-title-block">
+        <h3 class="lista-title" style="color:#F5D76E;">Los 4 pilares</h3>
+        <div style="width:100%;height:1px;background:#F5D76E;opacity:0.15;margin-top:12px;"></div>
+      </div>
+      <div class="lista-items">
+        <div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">💸 Dinero &amp; finanzas prácticas</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">📈 Negocios &amp; modelos de negocio</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">🎯 Marca &amp; estrategia</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">🧠 Criterio &amp; pensamiento estratégico</span>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Para quién es esto</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Para latinos que trabajan o emprenden en USA o Latam.</p><p class="body-line">Para el que tiene un negocio pero no sabe si está ganando o perdiendo.</p><p class="body-line">Para el que quiere empezar pero no sabe por dónde empezar con los números.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Para quién NO es</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Si buscas motivación, aquí no.</p><p class="body-line">Si quieres que te digan que puedes lograr todo si lo manifiestas, no.</p><p class="body-line">Si quieres fórmulas mágicas, tampoco.</p><p class="body-line">Pero si quieres estructura real y criterio para tomar decisiones — quédate.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#FAFAF8;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#FAFAF8;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#FAFAF8;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#FAFAF8;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      <div class="cta-prebody"><p class="cta-preline">1️⃣ Empezando con idea</p><p class="cta-preline">2️⃣ Negocio chico que ya vende</p><p class="cta-preline">3️⃣ Ya tengo estructura, quiero escalar</p></div>
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿En cuál etapa estás?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Comenta tu número — así sé qué contenido te sirve más.</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#E8601C;">🎬 Reel → Slides</span>
+        <span class="post-num">Post 2</span>
+      </div>
+      <div class="post-title">3 red flags de cuentas de 'finanzas' que son puro ruido</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Criterio &amp; pensamiento estratégico</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#E8601C;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#E8601C;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#E8601C;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#E8601C;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#E8601C;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">3 red flags</h2>
+        <p class="portada-subtitle" style="color:#E8601C;opacity:1;">de cuentas de 'finanzas' que son puro ruido.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#E8601C;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">ESTO ES LO QUE NADIE TE DICE</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Sigues cuentas de finanzas y sientes que no te funciona nada de lo que dicen.</p><p class="body-line">Tono directo, cero dramático.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#E8601C;opacity:0.05;">1</span>
+    <div style="height:5px;background:#E8601C;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#E8601C;color:#F5F0E8;">1</span>
+        <span class="numero-emoji">🚩</span>
+      </div>
+      <h3 class="numero-title" style="color:#E8601C;">Red flag 1</h3>
+      <div class="numero-body">
+        <p class="body-line">&quot;Te prometen resultados sin mostrarte el proceso.&quot;</p><p class="body-line">Cualquiera puede decir 'ya gané $10K'. La pregunta es cómo y con qué costos.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#E8601C;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#E8601C;opacity:0.05;">2</span>
+    <div style="height:5px;background:#E8601C;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#E8601C;color:#110D1A;">2</span>
+        <span class="numero-emoji">🚩</span>
+      </div>
+      <h3 class="numero-title" style="color:#E8601C;">Red flag 2</h3>
+      <div class="numero-body">
+        <p class="body-line">&quot;Solo muestran lifestyle, nunca los números reales.&quot;</p><p class="body-line">El carro, los viajes, la laptop en la playa. Pero nunca el balance ni el cash flow.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#E8601C;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">3</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B1F3A;">3</span>
+        <span class="numero-emoji">🚩</span>
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Red flag 3</h3>
+      <div class="numero-body">
+        <p class="body-line">&quot;El método está 'encerrado' en un curso de $997.&quot;</p><p class="body-line">Si la única forma de aprender es pagándoles a ellos, algo está mal.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#F5D76E;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#F5D76E;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#F5D76E;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#F5D76E;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Cuál red flag has visto más?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame en los comentarios. 👇</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 3</span>
+      </div>
+      <div class="post-title">3 errores de dinero que veo en latinos en USA</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Dinero &amp; finanzas prácticas</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#FAFAF8;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#FAFAF8;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#FAFAF8;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#FAFAF8;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#FAFAF8;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">3 errores de dinero</h2>
+        <p class="portada-subtitle" style="color:#FAFAF8;opacity:0.65;">que veo en latinos en USA.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#FAFAF8;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#6B3FCC;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#6B3FCC;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#6B3FCC;">Contexto</h3>
+        <div style="width:32px;height:2px;background:#6B3FCC;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">&quot;Nadie nos enseñó esto en la escuela.&quot;</p><p class="body-line">Cuando llegas a USA, el sistema financiero es completamente diferente.</p><p class="body-line">Estos errores no son de ignorancia — son de falta de información.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#6B3FCC;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">01</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B3FCC;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Error 1: Mezclar plata personal con la del negocio</h3>
+      <div class="numero-body">
+        <p class="body-line">Usas la misma cuenta para todo: mercado, facturas del negocio, nómina.</p><p class="body-line">¿El problema? Nunca sabes si tu negocio gana o pierdes.</p><p class="body-line">La solución: cuenta separada para el negocio, aunque sea una cuenta básica.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#FAFAF8;opacity:0.05;">02</span>
+    <div style="height:5px;background:#FAFAF8;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#FAFAF8;color:#E8601C;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#FAFAF8;">Error 2: No saber tu número mínimo mensual</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Cuánto necesitas ganar este mes para cubrir todo — personal y negocio?</p><p class="body-line">Si no sabes ese número, tomas decisiones a ciegas.</p><p class="body-line">La solución: suma todos los gastos fijos y ese es tu piso.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#FAFAF8;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">03</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#1A5C3A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Error 3: Ahorrar sin estructura</h3>
+      <div class="numero-body">
+        <p class="body-line">&quot;Ahorro lo que 'sobra'. Y casi nunca sobra nada.&quot;</p><p class="body-line">El ahorro que depende de la sobra no existe.</p><p class="body-line">La solución: ahorra primero, aunque sea $50 al mes. Automáticamente, apenas entra el dinero.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5F0E8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Acción de esta semana</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Elige UNO de estos errores — el que más te suena.</p><p class="body-line">Esta semana toma una sola acción para empezar a corregirlo.</p><p class="body-line">Un paso concreto es mejor que 10 ideas sin ejecutar.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#FAFAF8;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#FAFAF8;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#FAFAF8;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#FAFAF8;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿En cuál de los tres te ves?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame en los comentarios. 👇
+Y guarda este carrusel — lo vas a necesitar.</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#1A5C3A;">📌 Post estático</span>
+        <span class="post-num">Post 4</span>
+      </div>
+      <div class="post-title">No necesitas más motivación. Necesitas un sistema.</div>
+      <div class="post-pilar" style="color:#6B3FCC;">Criterio &amp; pensamiento estratégico</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="quote-mark" style="color:#F5D76E;opacity:0.08;">“</span>
+    <div class="deco-circle" style="bottom:-64px;right:-64px;width:180px;height:180px;background:#F5D76E;opacity:0.05;"></div>
+    <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#F5D76E;opacity:0.2;"></div>
+    <div class="slide-inner quote-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="quote-center">
+        <div style="width:48px;height:3px;background:#F5D76E;opacity:0.5;margin-bottom:24px;"></div>
+        <h2 class="quote-title">No necesitas más motivación.</h2>
+        <p class="quote-subtitle" style="color:#F5D76E;opacity:0.85;">Necesitas un sistema.</p>
+      </div>
+      <div class="quote-bottom">
+        <span class="handle">@gabrielakurtagic</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div>
+          </div>
+          <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+        </div>
+      </div>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+</section><section class="semana-section">
+    <div class="semana-header" style="background:#6B3FCC;">
+      <div class="sh-circle1"></div>
+      <div class="sh-circle2"></div>
+      <div style="position:relative;z-index:10;">
+        <div class="sh-dias">
+          <div class="sh-dias-dot"></div>
+          <span class="sh-dias-text">Lunes · Miércoles · Viernes · Domingo</span>
+        </div>
+        <div class="sh-title">Semana 2</div>
+        <div class="sh-divider"></div>
+        <div class="sh-tema">&ldquo;Cómo piensa Maga&rdquo;</div>
+      </div>
+    </div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 5</span>
+      </div>
+      <div class="post-title">Antes de emprender responde estas 5 preguntas</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Negocios &amp; modelos de negocio</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#F5D76E;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#F5D76E;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#F5D76E;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#F5D76E;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">Antes de emprender,</h2>
+        <p class="portada-subtitle" style="color:#F5D76E;opacity:1;">responde estas 5 preguntas (de números, no de sueños).</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#1A5C3A;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#1A5C3A;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#1A5C3A;">Contexto</h3>
+        <div style="width:32px;height:2px;background:#1A5C3A;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">&quot;Todos preguntan: ¿tiene pasión? ¿cuál es tu propósito?&quot;</p><p class="body-line">Nadie pregunta: ¿tienes el dinero para sobrevivir los primeros 3 meses sin ventas?</p><p class="body-line">Estas 5 preguntas son las que yo me hago antes de cualquier decisión de negocio.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#1A5C3A;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">01</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B3FCC;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">¿En cuánto tiempo cubres tus costos?</h3>
+      <div class="numero-body">
+        <p class="body-line">&quot;No 'cuando vea a ganar' — cuándo el negocio al menos se paga solo.&quot;</p><p class="body-line">Si no sabes calcularlo, lo más probable es que no lo sepas.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#6B3FCC;opacity:0.05;">02</span>
+    <div style="height:5px;background:#6B3FCC;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#6B3FCC;color:#F5F0E8;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#6B3FCC;">¿Cuánto te cuesta conseguir un cliente?</h3>
+      <div class="numero-body">
+        <p class="body-line">Si gastas $100 en publicidad y consigues 2 clientes — cada cliente te costó $50.</p><p class="body-line">¿Tu producto o servicio justifica ese costo? ¿Cuánto te deja ese cliente?</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#6B3FCC;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5D76E;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">03</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#110D1A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">¿Cuánto tiempo hasta que esto te dé retorno?</h3>
+      <div class="numero-body">
+        <p class="body-line">6 meses, 1 año, 2 años. Escríbelo.</p><p class="body-line">Si no puedes esperar ese tiempo, eso es información importante.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">04</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B1F3A;">04</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">¿Qué pasa si en 3 meses no vendiste nada?</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Puedes sobrevivir? ¿Tienes colchón? ¿Tienes plan B?</p><p class="body-line">No para asustarte — para que tomes decisiones con los ojos abiertos.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#FAFAF8;opacity:0.05;">05</span>
+    <div style="height:5px;background:#FAFAF8;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#FAFAF8;color:#E8601C;">05</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#FAFAF8;">¿Tienes al menos 3 meses de gastos ahorrados?</h3>
+      <div class="numero-body">
+        <p class="body-line">Llámalo runway. El tiempo que puedes operar sin ingresos.</p><p class="body-line">Sin esto, cualquier tropiezo se convierte en crisis.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#FAFAF8;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#FAFAF8;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#FAFAF8;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#FAFAF8;">Cómo usarlas</h3>
+        <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">No tienes que tener todas las respuestas perfectas.</p><p class="body-line">Pero sí tienes que tener las respuestas honestas.</p><p class="body-line">Respóndelas en papel. Lo que no sabes — es lo primero que tienes que aprender.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#FAFAF8;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5D76E;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#F5D76E;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#F5D76E;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#F5D76E;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#F5D76E;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Cuál de las 5 no puedes responder todavía?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame en los comentarios — eso es exactamente lo que voy a desarrollar en próximos posts.</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#E8601C;">🎬 Reel → Slides</span>
+        <span class="post-num">Post 6</span>
+      </div>
+      <div class="post-title">Qué es cash flow de verdad (versión latina, sin tecnicismos)</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Dinero &amp; finanzas prácticas</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#F5D76E;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#F5D76E;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#F5D76E;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#F5D76E;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">Qué es cash flow</h2>
+        <p class="portada-subtitle" style="color:#F5D76E;opacity:1;">de verdad (versión latina, sin tecnicismos).</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#E8601C;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#E8601C;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#E8601C;">¿Tu negocio vende bien pero no tiene plata?</h3>
+        <div style="width:32px;height:2px;background:#E8601C;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Eso se llama problema de cash flow.</p><p class="body-line">VENDES PERO NO TIENES PLATA — ¿POR QUÉ?</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#E8601C;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#1A5C3A;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#1A5C3A;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#1A5C3A;">Explicación simple</h3>
+        <div style="width:32px;height:2px;background:#1A5C3A;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Cash flow es el movimiento de dinero que entra y sale de tu negocio.</p><p class="body-line">No es cuánto vendes. Es cuánto tienes disponible y cuándo.</p><p class="body-line">&quot;Imagínate que vendes $5,000 este mes.&quot;</p><p class="body-line">Pero los proveedores hay que pagarlos ahora.</p><p class="body-line">Y tus clientes te pagan en 30 días.</p><p class="body-line">Ese gap — eso es tu problema de cash flow.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#1A5C3A;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div style="position:absolute;top:0;right:0;width:100px;height:100px;background:linear-gradient(135deg,rgba(245,215,110,0.07) 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="deco-circle" style="bottom:-24px;left:-24px;width:80px;height:80px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="slide-inner lista-inner">
+      <div class="lista-title-block">
+        <h3 class="lista-title" style="color:#F5D76E;">Las 3 reglas</h3>
+        <div style="width:100%;height:1px;background:#F5D76E;opacity:0.15;margin-top:12px;"></div>
+      </div>
+      <div class="lista-items">
+        <div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Regla 1: Conoce cuándo entra y cuánto sale cada ciclo.</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Regla 2: Nunca dependas de que el cliente pague a tiempo — ten colchón.</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Regla 3: El cash flow se proyecta — mínimo 30 días adelante.</span>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#FAFAF8;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#FAFAF8;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#FAFAF8;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#FAFAF8;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Quieres la plantilla que yo uso?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Comenta PLANTILLA 📋 y te la mando.</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 7</span>
+      </div>
+      <div class="post-title">Cómo separar tu plata personal de la del negocio (versión USA)</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Dinero &amp; finanzas prácticas</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#F5D76E;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#F5D76E;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#F5D76E;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#F5D76E;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">Cómo separar tu plata</h2>
+        <p class="portada-subtitle" style="color:#F5D76E;opacity:1;">personal de la del negocio (versión USA).</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Por qué importa tanto</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Cuando mezclas tu dinero personal con el del negocio:</p><p class="body-line">— No sabes si el negocio gana o pierde.</p><p class="body-line">— No puedes planificar impuestos.</p><p class="body-line">— En tiempo de impuestos: pesadilla.</p><p class="body-line">— Si el negocio tiene problemas legales: tus bienes personales en riesgo.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#FAFAF8;opacity:0.05;">01</span>
+    <div style="height:5px;background:#FAFAF8;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#FAFAF8;color:#1A5C3A;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#FAFAF8;">Paso 1: Abre una cuenta separada</h3>
+      <div class="numero-body">
+        <p class="body-line">No necesitas LLC todavía. Empieza con una cuenta bancaria separada.</p><p class="body-line">Opciones: Chase Business Complete, Bank of America Business, Relay (100% online, sin fees).</p><p class="body-line">Todo lo que entra del negocio: va ahí. Todo lo que sale del negocio: sale de ahí.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#FAFAF8;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#1A5C3A;opacity:0.05;">02</span>
+    <div style="height:5px;background:#1A5C3A;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#1A5C3A;color:#F5F0E8;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#1A5C3A;">Paso 2: Defínete un salario</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Cuánto necesitas tú, como persona, para vivir este mes?</p><p class="body-line">Eso es tu salario de negocio.</p><p class="body-line">Transfiérelo esa cantidad a tu cuenta personal — no más, no menos.</p><p class="body-line">Lo que queda en la cuenta del negocio, es del negocio. No tuyo para gastar.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#1A5C3A;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#1A5C3A;opacity:0.05;">03</span>
+    <div style="height:5px;background:#1A5C3A;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#1A5C3A;color:#110D1A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#1A5C3A;">Paso 3: Registra todo</h3>
+      <div class="numero-body">
+        <p class="body-line">No necesitas software caro. Empieza simple.</p><p class="body-line">Wave App (gratis, muy buena para pequeños negocios).</p><p class="body-line">Excel o Google Sheets (te enseño en próximos posts).</p><p class="body-line">Lo importante: cada dólar que entra y sale, registrado.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#1A5C3A;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div style="position:absolute;top:0;right:0;width:100px;height:100px;background:linear-gradient(135deg,rgba(245,215,110,0.07) 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="deco-circle" style="bottom:-24px;left:-24px;width:80px;height:80px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="slide-inner lista-inner">
+      <div class="lista-title-block">
+        <h3 class="lista-title" style="color:#F5D76E;">Señal de que lo estás haciendo bien</h3>
+        <div style="width:100%;height:1px;background:#F5D76E;opacity:0.15;margin-top:12px;"></div>
+      </div>
+      <div class="lista-items">
+        <div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">✅ ¿Cuánto vendió el negocio?</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">✅ ¿Cuánto gastó el negocio?</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">✅ ¿Cuánto ganó el negocio?</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">✅ ¿Cuánto me pagué yo?</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#F5D76E;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#F5D76E;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Si puedes responder las 4: vas por buen camino.</span>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#FAFAF8;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#FAFAF8;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#FAFAF8;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#FAFAF8;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Todavía mezclas tus cuentas?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame en qué etapa estás. 👇
+Y si quieres una plantilla simple para empezar a registrar: comenta REGISTRO 📋</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#1A5C3A;">📌 Post estático</span>
+        <span class="post-num">Post 8</span>
+      </div>
+      <div class="post-title">Tu marca no es tu logo. Es la expectativa.</div>
+      <div class="post-pilar" style="color:#E8601C;">Marca &amp; estrategia</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="quote-mark" style="color:#6B3FCC;opacity:0.08;">“</span>
+    <div class="deco-circle" style="bottom:-64px;right:-64px;width:180px;height:180px;background:#6B3FCC;opacity:0.05;"></div>
+    <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#6B3FCC;opacity:0.2;"></div>
+    <div class="slide-inner quote-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#6B3FCC;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="quote-center">
+        <div style="width:48px;height:3px;background:#6B3FCC;opacity:0.5;margin-bottom:24px;"></div>
+        <h2 class="quote-title">Tu marca no es tu logo.</h2>
+        <p class="quote-subtitle" style="color:#6B3FCC;opacity:0.85;">Es la expectativa que la gente tiene cuando te ve.</p>
+      </div>
+      <div class="quote-bottom">
+        <span class="handle">@gabrielakurtagic</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:4px;height:4px;border-radius:50%;background:#6B3FCC;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#6B3FCC;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#6B3FCC;opacity:0.2;"></div>
+          </div>
+          <span class="g-logo" style="color:#6B3FCC;opacity:0.2;">g.</span>
+        </div>
+      </div>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+</section><section class="semana-section">
+    <div class="semana-header" style="background:#1A5C3A;">
+      <div class="sh-circle1"></div>
+      <div class="sh-circle2"></div>
+      <div style="position:relative;z-index:10;">
+        <div class="sh-dias">
+          <div class="sh-dias-dot"></div>
+          <span class="sh-dias-text">Lunes · Miércoles · Viernes · Domingo</span>
+        </div>
+        <div class="sh-title">Semana 3</div>
+        <div class="sh-divider"></div>
+        <div class="sh-tema">&ldquo;Profundidad y criterio&rdquo;</div>
+      </div>
+    </div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 9</span>
+      </div>
+      <div class="post-title">5 señales de que necesitas sentarte con tus números YA</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Dinero &amp; finanzas prácticas</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#FAFAF8;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#FAFAF8;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#FAFAF8;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#FAFAF8;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#FAFAF8;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">5 señales</h2>
+        <p class="portada-subtitle" style="color:#FAFAF8;opacity:0.65;">de que necesitas sentarte con tus números YA.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div><div class="grid-dot" style="background:#FAFAF8;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#FAFAF8;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#E8601C;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#E8601C;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#E8601C;">Intro</h3>
+        <div style="width:32px;height:2px;background:#E8601C;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">No hace falta que el negocio esté en crisis para revisar tus números.</p><p class="body-line">De hecho, lo mejor es revisarlos antes de que haya crisis.</p><p class="body-line">Estas 5 señales son las que me dicen que alguien necesita poner orden ya.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#E8601C;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#FAFAF8;opacity:0.05;">01</span>
+    <div style="height:5px;background:#FAFAF8;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#FAFAF8;color:#E8601C;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#FAFAF8;">Siempre llegas al límite</h3>
+      <div class="numero-body">
+        <p class="body-line">&quot;Siempre llegas al límite — nunca sobra nada.&quot;</p><p class="body-line">Cada mes terminas raspando. Sin importar cuánto vendiste.</p><p class="body-line">Eso no es mala suerte. Es una estructura de gastos que no está alineada con tus ingresos.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#FAFAF8;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#E8601C;opacity:0.05;">02</span>
+    <div style="height:5px;background:#E8601C;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#E8601C;color:#F5F0E8;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#E8601C;">No sabes cuánto tienes en total ahora mismo</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Cuenta personal, cuenta del negocio, lo que te deben… ¿lo sabes?</p><p class="body-line">Si tienes que 'calcular' la respuesta — necesitas un sistema.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#E8601C;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#E8601C;opacity:0.05;">03</span>
+    <div style="height:5px;background:#E8601C;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#E8601C;color:#110D1A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#E8601C;">Tus decisiones de negocio las tomas por 'feeling'</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Lanzo este producto? ¿Contrato a alguien? ¿Bajo el precio?</p><p class="body-line">Si la respuesta viene de la intuición y no de los números — es una señal.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#E8601C;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">04</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B1F3A;">04</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Tienes deudas que llevan más de 6 meses igual</h3>
+      <div class="numero-body">
+        <p class="body-line">Sin crecer, sin bajar.</p><p class="body-line">Eso es síntoma de que el flujo de caja no alcanza para absorberlas.</p><p class="body-line">Hay que verlo con números para entender por qué.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">05</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B3FCC;">05</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Tu negocio vende, pero no sabes si es rentable</h3>
+      <div class="numero-body">
+        <p class="body-line">Vender no es ganar. Rentabilidad es lo que queda después de todos los costos.</p><p class="body-line">Si no puedes responder: ¿cuánto gano por cada dólar que vendo? — necesitas los números.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#FAFAF8;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#FAFAF8;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div><div class="pattern-dot" style="background:#FAFAF8;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#FAFAF8;">Qué hacer hoy</h3>
+        <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">No tienes que resolver todo hoy.</p><p class="body-line">Pero sí tienes que empezar hoy.</p><p class="body-line">Paso 1: anota cuánto entra y cuánto sale este mes. Solo eso.</p><p class="body-line">El siguiente paso viene solo cuando ya tienes el primero.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#FAFAF8;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#F5D76E;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#F5D76E;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#F5D76E;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#F5D76E;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Cuántas de estas señales reconoces?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame en los comentarios — sin juicio, solo para saber dónde estás.</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#E8601C;">🎬 Reel → Slides</span>
+        <span class="post-num">Post 10</span>
+      </div>
+      <div class="post-title">El error que hace que negocios rentables se hundan igual</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Negocios &amp; modelos de negocio</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#E8601C;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#E8601C;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#E8601C;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#E8601C;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#E8601C;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">El error que hace</h2>
+        <p class="portada-subtitle" style="color:#E8601C;opacity:1;">que negocios rentables se hundan igual.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#E8601C;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">¿Sabías que un negocio puede ser rentable y quebrarse?</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">RENTABLE PERO QUEBRADO — SÍ, ES POSIBLE.</p><p class="body-line">El error: confundir ventas con ganancias.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#E8601C;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#E8601C;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div><div class="pattern-dot" style="background:#E8601C;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#E8601C;">Ejemplo</h3>
+        <div style="width:32px;height:2px;background:#E8601C;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Imagina que vendes $8,000 este mes. Genial.</p><p class="body-line">Pero los gastos: inventario $3,000, nómina $2,500, renta $800, servicios $500, marketing $500.</p><p class="body-line">Total: $7,300.</p><p class="body-line">&quot;Ganancias&quot;: $700. Y eso antes de impuestos.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#E8601C;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#E8601C;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Solución</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">La solución no es vender más — es saber tu margen.</p><p class="body-line">¿Cuánto te queda por cada dólar que vendes?</p><p class="body-line">Si no sabes ese número hoy — ese es el número que tienes que saber.</p><p class="body-line">No es sexy. Pero te salva el negocio.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5D76E;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#F5D76E;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#F5D76E;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#F5D76E;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#F5D76E;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Sabes tu margen?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame en los comentarios. 👇</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 11</span>
+      </div>
+      <div class="post-title">Cómo calcular si tu precio cubre tus costos (en 4 pasos)</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Negocios &amp; modelos de negocio</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#F5D76E;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#F5D76E;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#F5D76E;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#F5D76E;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">Cómo calcular si tu precio</h2>
+        <p class="portada-subtitle" style="color:#F5D76E;opacity:1;">cubre tus costos (en 4 pasos).</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#1A5C3A;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#1A5C3A;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div><div class="pattern-dot" style="background:#1A5C3A;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#1A5C3A;">El problema</h3>
+        <div style="width:32px;height:2px;background:#1A5C3A;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Muchos negocios ponen precios por intuición.</p><p class="body-line">Lo que cobra la competencia.</p><p class="body-line">Lo que el cliente parece dispuesto a pagar.</p><p class="body-line">Lo que se me ocurre.</p><p class="body-line">El problema: sin saber tus costos, puedes estar vendiendo a pérdida sin darte cuenta.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#1A5C3A;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">01</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B3FCC;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Calcula tus costos directos</h3>
+      <div class="numero-body">
+        <p class="body-line">Costos directos = lo que gastas para hacer/entregar ese producto o servicio.</p><p class="body-line">Ejemplo para un producto físico:</p><p class="body-line">Materiales: $15 · Empaque: $2 · Envío: $5</p><p class="body-line">Total costo directo: $22</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#6B3FCC;opacity:0.05;">02</span>
+    <div style="height:5px;background:#6B3FCC;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#6B3FCC;color:#F5F0E8;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#6B3FCC;">Calcula tus costos fijos mensuales</h3>
+      <div class="numero-body">
+        <p class="body-line">Costos fijos = lo que pagas aunque no vendas nada.</p><p class="body-line">Renta: $800 · Servicios: $150 · Suscripciones/software: $100</p><p class="body-line">Tu salario mínimo: $2,000</p><p class="body-line">Total fijo: $3,050/mes</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#6B3FCC;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">03</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#110D1A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Calcula cuántas unidades necesitas vender</h3>
+      <div class="numero-body">
+        <p class="body-line">Para cubrir los costos fijos, ¿cuántas unidades tienes que vender?</p><p class="body-line">Fórmula: Costos fijos ÷ (Precio – Costo directo)</p><p class="body-line">Ejemplo: $3,050 ÷ ($50 - $22) = $3,050 ÷ $28 = 109 unidades/mes</p><p class="body-line">Ese es tu punto de equilibrio. Por encima de eso: ganancia.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">04</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#1A5C3A;">04</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">Evalúa si es realista</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Puedes vender 109 unidades al mes?</p><p class="body-line">Si no: bien, el precio funcional.</p><p class="body-line">Si no: necesitas subir el precio o bajar los costos (o ambos).</p><p class="body-line">Este es el análisis que te da claridad para tomar decisiones.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#FAFAF8;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#FAFAF8;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#FAFAF8;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#FAFAF8;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Hiciste este cálculo para tu negocio?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Comenta PUNTO DE EQUILIBRIO 📊 y te comparto la plantilla en Excel que yo uso.</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#1A5C3A;">📌 Post estático</span>
+        <span class="post-num">Post 12</span>
+      </div>
+      <div class="post-title">Lo que no mides, no lo puedes mejorar.</div>
+      <div class="post-pilar" style="color:#8B3F5A;">Criterio &amp; pensamiento estratégico</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#6B1F3A;color:#FAFAF8;">
+    <span class="quote-mark" style="color:#F5D76E;opacity:0.08;">“</span>
+    <div class="deco-circle" style="bottom:-64px;right:-64px;width:180px;height:180px;background:#F5D76E;opacity:0.05;"></div>
+    <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#F5D76E;opacity:0.2;"></div>
+    <div class="slide-inner quote-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="quote-center">
+        <div style="width:48px;height:3px;background:#F5D76E;opacity:0.5;margin-bottom:24px;"></div>
+        <h2 class="quote-title">Lo que no mides,</h2>
+        <p class="quote-subtitle" style="color:#F5D76E;opacity:0.85;">no lo puedes mejorar.</p>
+      </div>
+      <div class="quote-bottom">
+        <span class="handle">@gabrielakurtagic</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div>
+          </div>
+          <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+        </div>
+      </div>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+</section><section class="semana-section">
+    <div class="semana-header" style="background:#6B1F3A;">
+      <div class="sh-circle1"></div>
+      <div class="sh-circle2"></div>
+      <div style="position:relative;z-index:10;">
+        <div class="sh-dias">
+          <div class="sh-dias-dot"></div>
+          <span class="sh-dias-text">Lunes · Miércoles · Viernes · Domingo</span>
+        </div>
+        <div class="sh-title">Semana 4</div>
+        <div class="sh-divider"></div>
+        <div class="sh-tema">&ldquo;Valor profundo + Comunidad&rdquo;</div>
+      </div>
+    </div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 13</span>
+      </div>
+      <div class="post-title">Lo que me habría gustado saber antes de mezclar mi plata con la del negocio</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Dinero &amp; finanzas prácticas</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#F5D76E;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#F5D76E;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#F5D76E;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#F5D76E;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">Lo que me habría gustado saber</h2>
+        <p class="portada-subtitle" style="color:#F5D76E;opacity:1;">antes de mezclar mi plata con la del negocio.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#6B3FCC;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#6B3FCC;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div><div class="pattern-dot" style="background:#6B3FCC;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#6B3FCC;">La historia</h3>
+        <div style="width:32px;height:2px;background:#6B3FCC;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">&quot;Al principio de emprender, todo iba a la misma cuenta.&quot;</p><p class="body-line">Mis gastos personales, los del negocio, lo que entraba de clientes — todo mezclado.</p><p class="body-line">Hasta que llegó el momento de declarar impuestos y no sabía qué era qué.</p><p class="body-line">No fue catastrófico. Pero sí fue innecesariamente complicado.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#6B3FCC;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#FAFAF8;opacity:0.05;">01</span>
+    <div style="height:5px;background:#FAFAF8;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#FAFAF8;color:#1A5C3A;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#FAFAF8;">Cambio 1: Saber real — ¿el negocio gana?</h3>
+      <div class="numero-body">
+        <p class="body-line">Cuando separé las cuentas, por primera vez pude ver los números reales.</p><p class="body-line">No lo que yo pensaba que ganaba — lo que realmente quedaba.</p><p class="body-line">Eso siempre es necesario.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#FAFAF8;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#FAFAF8;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#1A5C3A;opacity:0.05;">02</span>
+    <div style="height:5px;background:#1A5C3A;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#1A5C3A;color:#F5F0E8;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#1A5C3A;">Cambio 2: Pagarme a ti mismo con criterio</h3>
+      <div class="numero-body">
+        <p class="body-line">Cuando todo está mezclado, te pagas lo que necesitas en el momento.</p><p class="body-line">Cuando está separado, defines un salario. Y respetas ese número.</p><p class="body-line">Eso cambia tu relación con el dinero — y con el negocio.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#1A5C3A;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#1A5C3A;opacity:0.05;">03</span>
+    <div style="height:5px;background:#1A5C3A;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#1A5C3A;color:#110D1A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#1A5C3A;">Cambio 3: Impuestos sin drama</h3>
+      <div class="numero-body">
+        <p class="body-line">Con cuentas separadas, al final del año tienes un registro claro.</p><p class="body-line">Tus gastos de negocio están documentados. Tus ingresos también.</p><p class="body-line">El contador (o la misma) puede trabajar con eso.</p><p class="body-line">Sin separación: horas reconstruyendo transacciones, y probablemente pagando de más.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#1A5C3A;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#1A5C3A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Cómo implementarlo esta semana</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Paso 1: Abre una cuenta de negocio (Relay, Chase Business, o la de tu banco actual).</p><p class="body-line">Paso 2: A partir de hoy, todo lo del negocio va ahí.</p><p class="body-line">Paso 3: Define cuánto te vas a pagar este mes.</p><p class="body-line">Todo eso. El resto viene solo.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#E8601C;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#FAFAF8;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#FAFAF8;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#FAFAF8;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#FAFAF8;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Todavía tienes todo mezclado?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#FAFAF8;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#FAFAF8;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Sin juicio — cuéntame en qué paso estás.
+Y si quieres una plantilla simple para empezar a registrar: comenta REGISTRO 📋</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#E8601C;">🎬 Reel → Slides</span>
+        <span class="post-num">Post 14</span>
+      </div>
+      <div class="post-title">Por qué los cursos de gurús no te funcionan (y no es tu culpa)</div>
+      <div class="post-pilar" style="color:#6B3FCC;">Criterio &amp; pensamiento estratégico</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#110D1A;color:#FAFAF8;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#E8601C;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#E8601C;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#E8601C;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#E8601C;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#E8601C;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">Por qué los cursos de gurús</h2>
+        <p class="portada-subtitle" style="color:#E8601C;opacity:1;">no te funcionan (y no es tu culpa).</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#FAFAF8;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div><div class="grid-dot" style="background:#E8601C;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#E8601C;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">¿Compraste un curso y no funcionó?</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">&quot;¿Es que no lo hiciste?&quot; No.</p><p class="body-line">NO ES TU CULPA. Y AQUÍ TE EXPLICO POR QUÉ.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;right:0;width:100px;height:100px;background:linear-gradient(135deg,rgba(107,63,204,0.07) 0%,transparent 60%);pointer-events:none;"></div>
+    <div class="deco-circle" style="bottom:-24px;left:-24px;width:80px;height:80px;background:#6B3FCC;opacity:0.04;"></div>
+    <div class="slide-inner lista-inner">
+      <div class="lista-title-block">
+        <h3 class="lista-title" style="color:#6B3FCC;">3 razones reales</h3>
+        <div style="width:100%;height:1px;background:#6B3FCC;opacity:0.15;margin-top:12px;"></div>
+      </div>
+      <div class="lista-items">
+        <div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#6B3FCC;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#6B3FCC;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Razón 1: Te enseñan a copiar, no a crear.</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#6B3FCC;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#6B3FCC;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">&quot;Haz lo que yo hice&quot; funciona cuando tienes el mismo contexto, la misma audiencia, el mismo momento.</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#6B3FCC;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#6B3FCC;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Razón 2: No lo que yo hice funciona cuando tienes el mismo contexto.</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#6B3FCC;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#6B3FCC;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Razón 3: Motivación sin sistema.</span>
+        </div><div class="lista-item">
+          <div class="lista-bullet-outer" style="background:#6B3FCC;opacity:0.12;">
+            <div class="lista-bullet-inner" style="background:#6B3FCC;opacity:0.8;"></div>
+          </div>
+          <span class="lista-text">Sales del curso emocionado. Pero no tienes un proceso claro para aplicarlo.</span>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#6B3FCC;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#F5D76E;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#F5D76E;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div><div class="pattern-dot" style="background:#F5D76E;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#F5D76E;">Lo que sí funciona</h3>
+        <div style="width:32px;height:2px;background:#F5D76E;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Entender los principios, aplicarlos a TU contexto, con TUS números.</p><p class="body-line">De eso hablo de estructura y criterio, no de fórmulas.</p><p class="body-line">¿Tuviste esta experiencia con algún curso? Cuéntame. 👇</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#F5D76E;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5D76E;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#F5D76E;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#F5D76E;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#F5D76E;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#F5D76E;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Tuviste una experiencia así?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">Cuéntame 👇</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#6B3FCC;">📚 Carrusel</span>
+        <span class="post-num">Post 15</span>
+      </div>
+      <div class="post-title">La ruta más corta para saber si tu negocio es rentable (en 30 minutos)</div>
+      <div class="post-pilar" style="color:#1A5C3A;">Negocios &amp; modelos de negocio</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#110D1A;color:#F5D76E;">
+    <div class="deco-circle" style="top:-80px;right:-80px;width:220px;height:220px;background:#F5D76E;opacity:0.07;"></div>
+    <div class="deco-circle" style="bottom:96px;right:-24px;width:90px;height:90px;background:#F5D76E;opacity:0.04;"></div>
+    <div style="position:absolute;top:0;right:0;width:6px;height:100%;background:#F5D76E;opacity:0.25;"></div>
+    <div class="slide-inner portada-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="portada-center">
+        <div class="accent-line" style="background:#F5D76E;opacity:0.6;width:40px;height:3px;margin-bottom:20px;"></div>
+        <h2 class="portada-title">¿Tu negocio es rentable?</h2>
+        <p class="portada-subtitle" style="color:#F5D76E;opacity:0.65;">Averígualo en 30 minutos con estas 4 preguntas.</p>
+      </div>
+      <div class="portada-bottom">
+        <div>
+          <div style="width:24px;height:1px;background:#F5D76E;opacity:0.15;margin-bottom:10px;"></div>
+          <span class="handle">@gabrielakurtagic</span>
+        </div>
+        <div class="dot-grid">
+          <div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div><div class="grid-dot" style="background:#F5D76E;opacity:0.15;"></div>
+        </div>
+        <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#110D1A;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#110D1A;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#110D1A;">Antes de empezar</h3>
+        <div style="width:32px;height:2px;background:#110D1A;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Necesitas: tu teléfono (o Excel) y 30 minutos sin interrupciones.</p><p class="body-line">No necesitas software especial. Solo honestidad con los números.</p><p class="body-line">Al final vas a saber si tu negocio es rentable — y cuánto.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#110D1A;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#110D1A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">01</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#6B3FCC;">01</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">¿Cuánto son tus costos directos?</h3>
+      <div class="numero-body">
+        <p class="body-line">¿Cuánto gastas para producir/entregar lo que vendes?</p><p class="body-line">Materiales, empaques, tiempo o lo monetizas, subcontratistas.</p><p class="body-line">Ejemplo: $25 por unidad producida.</p><p class="body-line">Escríbelo. Costo directo = ___</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <span class="numero-watermark" style="color:#6B3FCC;opacity:0.05;">02</span>
+    <div style="height:5px;background:#6B3FCC;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#6B3FCC;color:#F5F0E8;">02</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#6B3FCC;">¿Cuáles son tus costos fijos mensuales?</h3>
+      <div class="numero-body">
+        <p class="body-line">Lo que pagas aunque no vendas nada este mes.</p><p class="body-line">Renta, servicios, suscripciones, tu salario mínimo.</p><p class="body-line">Ejemplo: $2,500/mes</p><p class="body-line">Escríbelo. Costos fijos = ___</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#6B3FCC;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#6B3FCC;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#110D1A;color:#F5D76E;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">03</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#110D1A;">03</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">¿Cuánto vendiste este mes?</h3>
+      <div class="numero-body">
+        <p class="body-line">No lo que cobraste — lo que ya cobraste.</p><p class="body-line">Ejemplo: $6,000 en ventas.</p><p class="body-line">Escríbelo. Ventas del mes = ___</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#1A5C3A;color:#FAFAF8;">
+    <span class="numero-watermark" style="color:#F5D76E;opacity:0.05;">04</span>
+    <div style="height:5px;background:#F5D76E;opacity:0.7;position:absolute;top:0;left:0;right:0;"></div>
+    <div class="slide-inner numero-inner" style="padding-top:41px;">
+      <div class="numero-badge-row">
+        <span class="numero-badge" style="background:#F5D76E;color:#1A5C3A;">04</span>
+        
+      </div>
+      <h3 class="numero-title" style="color:#F5D76E;">¿Qué queda?</h3>
+      <div class="numero-body">
+        <p class="body-line">Fórmula: Ventas – Costos directos totales – Costos fijos = Ganancia</p><p class="body-line">Ejemplo: $6,000 – (25 × unidades vendidas) – $2,500</p><p class="body-line">Si vendes 100 unidades: $6,000 – $2,500 – $2,500 = $1,000 de ganancia.</p><p class="body-line">¿Ese número te paga a ti? ¿La promesa crecer?</p>
+      </div>
+      <div class="slide-footer">
+        <div style="flex:1;height:1px;background:#F5D76E;opacity:0.1;"></div>
+        <span class="g-logo-sm" style="color:#F5D76E;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#F5F0E8;color:#110D1A;">
+    <div style="position:absolute;top:0;left:0;width:5px;height:100%;background:#110D1A;opacity:0.5;"></div>
+    <div class="deco-circle" style="bottom:-48px;right:-48px;width:140px;height:140px;background:#110D1A;opacity:0.04;"></div>
+    <div class="dot-pattern-tr">
+      <div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div><div class="pattern-dot" style="background:#110D1A;opacity:0.08;"></div>
+    </div>
+    <div class="slide-inner contenido-inner" style="padding-left:32px;">
+      <div class="contenido-title-block">
+        <h3 class="contenido-title" style="color:#110D1A;">Interpretando el resultado</h3>
+        <div style="width:32px;height:2px;background:#110D1A;opacity:0.3;margin-top:12px;"></div>
+      </div>
+      <div class="contenido-body">
+        <p class="body-line">Número positivo y cubre tu salario mínimo → vas por buen camino.</p><p class="body-line">Número positivo pero no te paga → hay que ajustar precios o costos.</p><p class="body-line">Número negativo → urgente revisar estructura.</p><p class="body-line">Cualquier resultado es información valiosa.</p>
+      </div>
+      <div class="slide-footer">
+        <div style="width:12px;height:1px;background:#110D1A;opacity:0.2;"></div>
+        <span class="g-logo-sm" style="color:#110D1A;opacity:0.12;">g.</span>
+      </div>
+    </div>
+  </div><div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <div class="cta-ring" style="width:320px;height:320px;border-color:#F5D76E;opacity:0.04;"></div>
+    <div class="cta-ring" style="width:220px;height:220px;border-color:#F5D76E;opacity:0.06;"></div>
+    <div class="cta-ring" style="width:120px;height:120px;border-color:#F5D76E;opacity:0.03;"></div>
+    <div style="position:absolute;top:0;left:0;right:0;height:4px;background:#F5D76E;opacity:0.3;"></div>
+    <div class="slide-inner cta-inner">
+      
+      <div class="cta-main">
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+        <h3 class="cta-title">¿Cuál fue tu resultado?</h3>
+        <div class="cta-deco-line">
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:#F5D76E;opacity:0.3;"></div>
+          <div style="width:32px;height:2px;background:#F5D76E;opacity:0.4;"></div>
+        </div>
+      </div>
+      <p class="cta-subtitle">No tienes que compartir el número — solo dime: positivo, ajustado, o negativo.
+Y guarda este carrusel para repetirlo cada mes. 📌</p>
+      <span class="cta-arrow">↓</span>
+    </div>
+    <div class="cta-bottom">
+      <span class="g-logo" style="opacity:0.2;">g.</span>
+      <span class="handle">@gabrielakurtagic</span>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+<div class="carousel-container">
+      <div class="post-label-row">
+        <span class="formato-badge" style="background:#1A5C3A;">📌 Post estático</span>
+        <span class="post-num">Post 16</span>
+      </div>
+      <div class="post-title">Cierre de mes — Un mes de contenido real.</div>
+      <div class="post-pilar" style="color:#E8601C;">Marca &amp; estrategia</div>
+      <div style="margin-top:12px;">
+        <div class="carousel-track">
+<div class="slide" style="background:#6B3FCC;color:#FAFAF8;">
+    <span class="quote-mark" style="color:#F5D76E;opacity:0.08;">“</span>
+    <div class="deco-circle" style="bottom:-64px;right:-64px;width:180px;height:180px;background:#F5D76E;opacity:0.05;"></div>
+    <div style="position:absolute;top:0;left:0;width:6px;height:100%;background:#F5D76E;opacity:0.2;"></div>
+    <div class="slide-inner quote-inner">
+      <div class="top-tag">
+        <div class="dot" style="background:#F5D76E;"></div>
+        <span class="tag-text">Gabriela Kurtagic</span>
+      </div>
+      <div class="quote-center">
+        <div style="width:48px;height:3px;background:#F5D76E;opacity:0.5;margin-bottom:24px;"></div>
+        <h2 class="quote-title">Un mes de contenido real.</h2>
+        <p class="quote-subtitle" style="color:#F5D76E;opacity:0.85;">El siguiente viene con más estructura, más profundidad y mejores herramientas.
+Gracias por estar aquí.</p>
+      </div>
+      <div class="quote-bottom">
+        <span class="handle">@gabrielakurtagic</span>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="display:flex;gap:4px;">
+            <div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div><div style="width:4px;height:4px;border-radius:50%;background:#F5D76E;opacity:0.2;"></div>
+          </div>
+          <span class="g-logo" style="color:#F5D76E;opacity:0.2;">g.</span>
+        </div>
+      </div>
+    </div>
+  </div>      </div>
+      </div>
+    </div>
+    <div style="height:32px;"></div>
+</section></div>
+</body>
+</html>
